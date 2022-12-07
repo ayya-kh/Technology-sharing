@@ -24,3 +24,6 @@
 - IDE：Cloud9
 
 ## 使用素材
+
+## 実装機能リストのURLの記載
+https://docs.google.com/spreadsheets/d/1lRgkCyvi9Ijx9MeV0rZM5udVGd5baHfekm0l482Udgg/edit#gid=885378170
