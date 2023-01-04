@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+  <% if @contribution.video.attached? %> <!-- videoを持っているかどうか -->
+    <div class="col-md-6 pt-4 px-3 d-flex">
+      <video src="<%= rails_blob_path(@contribution.video) %>" width="240px"  class= "bd-placeholder-img bd-placeholder-img-lg card-img rounded shadow-lg"  type="video/mp4" controls></video>
+    </div>
+    <div class="col-md-6 pt-4">
+      <div class="item-information">
+        <h1><%= @contribution.title %></h1>
+
+        <h1 class="mt-5"><%= @contribution.text %></h1>
+
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+class ContributionTagRelation < ApplicationRecord
+end

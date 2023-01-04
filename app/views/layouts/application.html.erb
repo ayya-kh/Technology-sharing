@@ -6,11 +6,34 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header style="z-index: 10 !important; position: relative;">
+      <% if request.fullpath.include? "/admin" %>
+        <%= render "layouts/admin_header" %>
+      <% else %>
+        <%= render "layouts/public_header" %>
+      <% end %>
+    </header>
+
     <%= yield %>
+
+    <footer>
+      <div class="fixed-bottom">
+        <div class="bg-light border-top py-3">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 mb-2">
+                <span class="text-muted">Copyright © Technology-sharing All Rights Reserved.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
