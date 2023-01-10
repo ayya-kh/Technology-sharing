@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-12 text-center">
+      <h2>いいね一覧 <span class="small">(全<%= @contributions.count %>件)</span></h2>
+    </div>
+  </div>
+
+  <!-- 一覧表示 -->
+  <div class="row m-3">
+    <% @contributions.each do |contribution| %>
+    <div class="col-sm-12 col-xl-12 mb-4">
+      <div class="card bg-light h-100 justify-content-between shadow-lg hover-img">
+        <div class="card-body flex-grow-1 d-flex flex-column justify-content-between">
+          <%= link_to contribution_path(contribution), class: "text-reset stretched-link" do %>
+            <h5 class="card-title"><%= contribution.title %></h5>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>

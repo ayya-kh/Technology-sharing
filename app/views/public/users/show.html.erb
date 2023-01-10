@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="col-lg-10 col-xl-8 mx-auto">
+    <div class="row mb-3">
+      <div class="col-12">
+        <h3 class="mb-4">マイページ</h3>
+
+        <div class="row mb-3">
+          <div class="col-6 col-sm-4 col-md-3 d-flex align-items-center">
+            <h5>ユーザー情報</h5>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3">
+            <%= link_to "編集する", users_information_edit_path, class: "btn btn-success btn-block" %>
+          </div>
+          <div class="col-6 col-sm-4 col-md-3">
+            <%= link_to "いいね一覧", users_favorites_path, class: "btn btn-success btn-block" %>
+          </div>
+        </div>
+
+        <table class="table table-bordered shadow-lg p-5">
+          <tr>
+            <th class="table-active">氏名</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th class="table-active">メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,9 +5,26 @@
     </div>
   </div>
 
+  <!-- キーワード検索機能 -->
+  <div class="text-right">
+    <%= form_with url: contributions_path, method: :get do |f| %>
+      <%= f.text_field :search %>
+      <%= f.submit 'キーワード検索' %>
+    <% end %>
+  </div>
+
+  <!-- タグ検索機能 -->
+  <div class="text-right">
+    <%= form_with url: contributions_path, method: :get do |f| %>
+      <%= f.collection_select(:tag_name, Tag.select(:name).distinct, :name, :name) %>
+      <%= f.submit 'タグ検索' %>
+    <% end %>
+  </div>
+
+  <!-- 一覧表示 -->
   <div class="row m-3">
     <% @contribution.each do |contribution| %>
-    <div class="col-sm-6 col-xl-3 mb-4">
+    <div class="col-sm-12 col-xl-12 mb-4">
       <div class="card bg-light h-100 justify-content-between shadow-lg hover-img">
         <div class="card-body flex-grow-1 d-flex flex-column justify-content-between">
           <%= link_to contribution_path(contribution), class: "text-reset stretched-link" do %>

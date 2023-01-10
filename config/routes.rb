@@ -20,10 +20,20 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     resources :registrations, only: [:new, :create]
     resources :sessions, only: [:new, :create, :destroy]
-    resources :users, only: [:show, :edit, :update, :unsubscribe, :withdraw]
-    resources :contributions, only: [:new, :index, :show, :edit, :update]
-    post "contributions" => "contributions#create"
 
+    get 'users/my_page' => "users#show"
+    get 'users/information/edit' => "users#edit"
+    patch 'users/information' => "users#update"
+    get 'users/unsubscribe' => "users#unsubscribe"
+    patch 'users/withdraw' => "users#withdraw"
+    get 'users/favorites' => 'users#favorites'
+
+    resources :contributions, only: [:new, :index, :show, :edit, :update, :destroy] do
+      resources :favorites, only: [:create, :destroy]
+    end
+
+    post "contributions" => "contributions#create"
+    get "contributions" => "contributions#search"
     resources :comments, only: [:create, :update]
     resources :likes, only: [:index, :show, :destroy]
   end

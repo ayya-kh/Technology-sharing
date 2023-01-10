@@ -8,20 +8,22 @@
   <div class="row">
     <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
 
-       <%= form_with model: @contribution do |f| %>
-       <div class="style-1b6txcu e1aqgsb44">
-         <!--<input placeholder="タイトル" tabindex="10" class="style-rhcj7c e1aqgsb43" value="" >-->
-        <h3>タイトル</h3>
-        <%= f.text_field :title %>
-       </div>
+    <%= form_with(model:[@contribution]) do |f| %>
+        <div class="style-1b6txcu e1aqgsb44">
+            <h3>タイトル</h3>
+            <%= f.text_field :title %>
+        </div>
 
-        <h3>本文</h3>
-        <%= f.text_area :text %>
+            <h3>本文</h3>
+            <%= f.text_area :text %>
 
-        <h3>動画</h3><%= f.file_field :video %> <br>
-        <%= f.submit '投稿' %>
-      <% end %>
+            <h3>動画</h3><%= f.file_field :video %> <br>
 
+            <h3>タグ</h3>
+            <%= text_field_tag :tag %>
+
+        <%= f.submit '投稿', style: "margin-bottom: 100px;" %>
+    <% end %>
     </div>
   </div>
 </div>
