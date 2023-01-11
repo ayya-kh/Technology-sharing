@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :contributions, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_contributions, through: :favorites, source: :contribution
-
+  has_many :comments  #User.commentsで、ユーザーの所有するコメントを取得
 end

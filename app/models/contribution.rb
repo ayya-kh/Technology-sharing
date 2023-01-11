@@ -2,12 +2,15 @@ class Contribution < ApplicationRecord
   has_one_attached :video
   validates :title, length: { in: 1..100 }
 
+  belongs_to :user
+  #Contribution.commentsで、投稿が所有するコメントを取得
+  has_many :comments, dependent: :destroy
+
   #contributionテーブルから中間テーブルに対する関連付け
   has_many :contribution_tag_relations, dependent: :destroy
   #contributionテーブルから中間テーブルを介してTagsテーブルへの関連付け
   has_many :tags, through: :contribution_tag_relations, dependent: :destroy
 
-  belongs_to :user
   has_many :favorites, dependent: :destroy
 
   def self.search_by_word(word)

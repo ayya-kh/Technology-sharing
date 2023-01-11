@@ -10,24 +10,7 @@
           <span><%= tag.name %></span>
         <% end %>
 
-        <h1><%= @contribution.title %></h1>
-
-        <h1 class="mt-5"><%= @contribution.text %></h1>
-
-
-
-      </div>
-    </div>
-  <% end %>
-    <div>
-      <% if @contribution.user_id == current_user.id %>
-        <%= link_to "削除", "/contributions/#{@contribution.id}", method: :delete %>
-      <% end %>
-
-
-
-    <!-- いいね機能 -->
-    <%# @contribution.each do |contribution| %>
+        <!-- いいね機能 -->
       <% if @contribution.favorited_by?(current_user) %>
         <%= link_to contribution_favorite_path(@contribution), method: :delete do %>
           ♥<%= @contribution.favorites.count %> いいね
@@ -37,8 +20,44 @@
           ♡<%= @contribution.favorites.count %> いいね
         <% end %>
       <% end %>
-    <%# end %>
 
+        <h1><%= @contribution.title %></h1>
+
+        <h1 class="mt-5"><%= @contribution.text %></h1>
+
+      </div>
+    </div>
+  <% end %>
+    <div>
+      <% if @contribution.user_id == current_user.id %>
+        <%= link_to "削除", "/contributions/#{@contribution.id}", method: :delete %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6 pt-4 px-3 d-flex">
+      <h4>コメント投稿</h4>
+
+      <div class="col-md-6 pt-4 px-3 d-flex">
+        <%= form_with model:([@contribution, @comment]) do |f| %>
+          <%= f.text_field :text %>
+          <br>
+          <%= f.submit 'コメントする' %>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 pt-4 px-3 d-flex">
+      <h4>コメント一覧</h4>
+      <br>
+
+      <% @comments.each do |c| %>
+        <div>
+          <a><%= @contribution.user.id %>"><%= c.user.email %></a>
+          <%= c.text %>
+          <hr>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

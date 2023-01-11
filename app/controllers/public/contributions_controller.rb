@@ -25,6 +25,8 @@ class Public::ContributionsController < ApplicationController
 
   def show
     @contribution = Contribution.find(params[:id])
+    @comments = @contribution.comments
+    @comment = Comment.new
   end
 
   def edit
@@ -38,12 +40,12 @@ class Public::ContributionsController < ApplicationController
     contribution = Contribution.new(contribution_params)
     contribution.user_id = current_user.id
 
-    if contribution.save
+    if contribution.save!
       #タグの記述
       tag = Tag.new
       tag.name = params[:tag]
 
-      if tag.save
+      if tag.save!
         contribution_copy = Contribution.find_by(user_id: current_user.id, title: contribution_params[:title], text: contribution_params[:text] )
         contribution_id = contribution_copy.id
 
@@ -53,7 +55,7 @@ class Public::ContributionsController < ApplicationController
         contribution_tag_relation = ContributionTagRelation.new
         contribution_tag_relation[:contribution_id] = contribution_id
         contribution_tag_relation[:tag_id] = tag_id
-        contribution_tag_relation.save
+        contribution_tag_relation.save!
 
         redirect_to contributions_path
       else

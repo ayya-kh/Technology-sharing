@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
     resources :contributions, only: [:new, :index, :show, :edit, :update, :destroy] do
       resources :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create]
     end
 
     post "contributions" => "contributions#create"
