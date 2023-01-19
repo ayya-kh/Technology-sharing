@@ -5,17 +5,31 @@
     </div>
   </div>
 
+
+
   <div class="row">
     <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
 
     <%= form_with(model:[@contribution]) do |f| %>
+
+      <% if @error_contribution.present? %>
+        <div id="error_explanation">
+          <h2><%= @error_contribution.errors.count %>件のエラーが発生しました。</h2>
+          <ul>
+            <% @error_contribution.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
         <div class="style-1b6txcu e1aqgsb44">
             <h3>タイトル</h3>
-            <%= f.text_field :title %>
+            <%= f.text_field :title, :size=>"60" %>
         </div>
 
             <h3>本文</h3>
-            <%= f.text_area :text %>
+            <%= f.text_area :text, :size=>"60x10" %>
 
             <h3>動画</h3><%= f.file_field :video %> <br>
 

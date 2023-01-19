@@ -24,9 +24,10 @@ class Contribution < ApplicationRecord
   #動画が存在しているかを確認するバリデーション
   validates :video, presence: true
 
+  
+
   #ユーザidがFavoritesテーブル内に存在するかどうか
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-
 end

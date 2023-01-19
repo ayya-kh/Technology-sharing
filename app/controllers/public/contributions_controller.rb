@@ -25,27 +25,44 @@ class Public::ContributionsController < ApplicationController
 
   def show
     @contribution = Contribution.find(params[:id])
+
     @comments = @contribution.comments
     @comment = Comment.new
   end
 
   def edit
+    @contribution = Contribution.find(params[:id])
+
+    unless @contribution.user == current_user
+      redirect_to edit_contribution_path
+    end
   end
 
   def update
+    @contribution = Contribution.find(params[:id])
+
+    if @contribution.user != current_user
+      redirect_to  edit_contribution_path
+    else
+      if @contribution.update(contribution_params)
+        redirect_to contribution_path
+      else
+        render :edit
+      end
+    end
   end
 
   def create
     #タイトル、本文、動画の記述
-    contribution = Contribution.new(contribution_params)
-    contribution.user_id = current_user.id
+    @contribution = Contribution.new(contribution_params)
+    @contribution.user_id = current_user.id
 
-    if contribution.save!
+    if @contribution.save
       #タグの記述
       tag = Tag.new
       tag.name = params[:tag]
 
-      if tag.save!
+      if tag.save
         contribution_copy = Contribution.find_by(user_id: current_user.id, title: contribution_params[:title], text: contribution_params[:text] )
         contribution_id = contribution_copy.id
 
@@ -62,7 +79,7 @@ class Public::ContributionsController < ApplicationController
         render :new
       end
     else
-      @contribution = Contribution.new
+      @error_contribution = @contribution
       @tag = Tag.new
       render :new
     end

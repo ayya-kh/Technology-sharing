@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    # 全てのモデル記載
+    models:
+      user: ユーザー
+      contribution: 投稿
+      comment: コメント
+
+    attributes:
+      # 各モデルのカラム名を記載
+      comment:
+        text: コメント
+
+      user:
+        name: 名前
+        email: メール
+        password: パスワード
+
+      contribution:
+        title: タイトル
+        text: 本文
+        video: 動画

@@ -2,8 +2,10 @@
   <div class="col-md-10 col-lg-9 col-xl-8 mx-auto">
     <h2 class="mb-4">新規登録</h2>
 
-    <%= form_with model: @user, url: user_registration_path, local: true, class: "mb-3 pl-md-3" do |f| %>
-    <%= render "public/shared/error_messages", resource: resource %>
+    <div>
+      <%= render "public/shared/error_messages", resource: resource %>
+    </div>
+    <%= form_with model: @user, url: user_registration_path, local: true, class: "pl-md-3" do |f| %>
 
     <div class="form-group row">
       <%= f.label "名前", class: "col-md-4 col-form-label" %>

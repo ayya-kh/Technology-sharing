@@ -10,7 +10,7 @@
           <span><%= tag.name %></span>
         <% end %>
 
-        <!-- いいね機能 -->
+      <!-- いいね機能 -->
       <% if @contribution.favorited_by?(current_user) %>
         <%= link_to contribution_favorite_path(@contribution), method: :delete do %>
           ♥<%= @contribution.favorites.count %> いいね
@@ -21,43 +21,81 @@
         <% end %>
       <% end %>
 
-        <h1><%= @contribution.title %></h1>
+      <!-- 編集機能と削除機能 -->
+      <% if @contribution.user_id == current_user.id %>
+        <%= link_to "編集", edit_contribution_path(@contribution) %>
+        <%= link_to "削除", "/contributions/#{@contribution.id}", method: :delete %>
+      <% else %>
+        <td></td>
+        <td></td>
+      <% end %>
 
-        <h1 class="mt-5"><%= @contribution.text %></h1>
+      <!-- タイトルと本文 -->
+      <div style="overflow-wrap: break-word">
+        <h1><%= @contribution.title %></h1>
+        <h4 class="mt-5"><%= @contribution.text %></h4>
+      </div>
 
       </div>
     </div>
   <% end %>
-    <div>
-      <% if @contribution.user_id == current_user.id %>
-        <%= link_to "削除", "/contributions/#{@contribution.id}", method: :delete %>
-      <% end %>
-    </div>
 
+  <!-- コメント一覧 -->
+  <div class="col-md-12 pt-4 px-3 d-flex">
+    <h4>コメント</h4>
+  </div>
+  <div class="col-md-12 pt-4 px-3 d-flex">
     <div class="col-md-6 pt-4 px-3 d-flex">
-      <h4>コメント投稿</h4>
-
-      <div class="col-md-6 pt-4 px-3 d-flex">
-        <%= form_with model:([@contribution, @comment]) do |f| %>
-          <%= f.text_field :text %>
-          <br>
-          <%= f.submit 'コメントする' %>
-        <% end %>
-      </div>
-
-    </div>
-
-    <div class="col-md-6 pt-4 px-3 d-flex">
-      <h4>コメント一覧</h4>
-      <br>
-
-      <% @comments.each do |c| %>
-        <div>
-          <a><%= @contribution.user.id %>"><%= c.user.email %></a>
-          <%= c.text %>
-          <hr>
+      <%= form_with model:([@contribution, @comment]) do |f| %>
+        <% if @error_comment.present? %>
+        <div id="error_explanation">
+          <h2><%= @error_comment.errors.count %>件のエラーが発生しました。</h2>
+          <ul>
+            <% @error_comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
         </div>
       <% end %>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.text_area :text, size:"100*20", class: "form-control",placeholder: "コメント" %>
+        </div>
+      </div>
+      <%= f.submit 'コメントする' %>
+      <% end %>
     </div>
+  </div>
+
+  <!-- コメント一覧 -->
+  <div class="col-md-12 pt-4 px-3 d-flex">
+    <h4>コメント一覧</h4>
+  </div>
+
+
+  <table class="table table-bordered">
+    <tr>
+      <th class="table-active">削除</th>
+      <th class="table-active">編集</th>
+      <th class="table-active" style = "width:20%" >ユーザー名</th>
+      <th class="table-active" style = "width:56%" >コメント</th>
+    </tr>
+    <% @comments.each do |c| %>
+    <tr>
+      <% if c.user_id == current_user.id %>
+        <td><%= link_to "削除", comment_path(c), method: :delete, class: "btn btn-danger" %></td>
+        <td><%= link_to "編集", edit_comment_path(c), class: "btn btn-success btn-block" %></td>
+        <td><%= c.user.name %></td>
+        <td><%= c.text %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+        <td><%= c.user.name %></td>
+        <td><%= c.text %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
   </div>
 </div>

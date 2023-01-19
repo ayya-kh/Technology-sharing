@@ -35,7 +35,8 @@ Rails.application.routes.draw do
 
     post "contributions" => "contributions#create"
     get "contributions" => "contributions#search"
-    resources :comments, only: [:create, :update]
+    resources :comments, only: [:create, :update, :edit, :destroy]
+    patch "comments" => "commentss#update"
     resources :likes, only: [:index, :show, :destroy]
   end
 
