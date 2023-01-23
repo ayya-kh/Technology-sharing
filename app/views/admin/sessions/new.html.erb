@@ -3,7 +3,7 @@
     <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
       <h2 class="mb-4">管理者ログイン</h2>
 
-    <%= form_for(resource, as: resource_name, url: admin_session_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: admin_session_path) do |f| %>
     <div class="form-horizontal">
       <div class="form-group row">
           <%= f.label :メールアドレス, class: "control-label" %>
@@ -15,7 +15,7 @@
       <div class="form-group row">
           <%= f.label :パスワード, class: "control-label" %>
           <div class="col-sm-8">
-            <%= f.password_field :encrypted_password, autocomplete: "encrypted_password", class: "form-control" %>
+            <%= f.password_field :password, autocomplete: "password", class: "form-control" %>
           </div>
       </div>
 

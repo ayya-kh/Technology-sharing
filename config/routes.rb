@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # 顧客用
+  # ユーザー用
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "homes#top"
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:index, :update, :destroy]
   end
 end

@@ -15,4 +15,4 @@ Tag.create([
   { name: 'Ruby on Rails' },
 ])
 
-Admin.create!(email:"admin@test",password:"test",password_confirmation:"test")
+Admin.create!(email:"admin@test",password:"testtest")
