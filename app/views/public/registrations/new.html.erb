@@ -22,14 +22,14 @@
     </div>
 
     <div class="form-group row">
-       <%= f.label :password, "パスワード（６文字以上）", class: "col-md-4 col-form-label" %>
-       <div class="col-sm-6 col-md-4">
-         <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
-       </div>
+      <%= f.label :password, "パスワード（６文字以上）", class: "col-md-4 col-form-label" %>
+      <div class="col-sm-6 col-md-4">
+       <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+      </div>
     </div>
 
     <div class="form-group row">
-        <%= f.label :password_confirmation, "パスワード（確認用）", class: "col-md-4 col-form-label" %>
+      <%= f.label :password_confirmation, "パスワード（確認用）", class: "col-md-4 col-form-label" %>
       <div class="col-sm-6 col-md-4">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
       </div>
@@ -43,6 +43,6 @@
   <% end %>
 
     <h4 class="mb-3">既に登録済みの方</h4>
-      <p class="pl-3"><%= link_to "こちら", new_user_session_path %> からログインしてください。</p>
+    <p class="pl-3"><%= link_to "こちら", new_user_session_path %> からログインしてください。</p>
   </div>
 </div>

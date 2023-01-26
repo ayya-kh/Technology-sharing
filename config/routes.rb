@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     get "contributions" => "contributions#search"
     resources :comments, only: [:create, :update, :edit, :destroy]
     patch "comments" => "commentss#update"
-    resources :likes, only: [:index, :show, :destroy]
   end
 
   namespace :admin do
