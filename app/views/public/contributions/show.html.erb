@@ -11,20 +11,27 @@
         <% end %>
 
         <!-- いいね機能 -->
-        <% if @contribution.favorited_by?(current_user) %>
-          <%= link_to contribution_favorite_path(@contribution), method: :delete do %>
-            ♥<%= @contribution.favorites.count %> いいね
-          <% end %>
-        <% else %>
-          <%= link_to contribution_favorites_path(@contribution), method: :post do %>
-            ♡<%= @contribution.favorites.count %> いいね
+        <% if user_signed_in? %>
+          <% if @contribution.favorited_by?(current_user) %>
+            <%= link_to contribution_favorite_path(@contribution), method: :delete do %>
+              ♥<%= @contribution.favorites.count %> いいね
+            <% end %>
+          <% else %>
+            <%= link_to contribution_favorites_path(@contribution), method: :post do %>
+              ♡<%= @contribution.favorites.count %> いいね
+            <% end %>
           <% end %>
         <% end %>
 
         <!-- 編集機能と削除機能 -->
-        <% if @contribution.user_id == current_user.id %>
-          <%= link_to "編集", edit_contribution_path(@contribution) %>
-          <%= link_to "削除", "/contributions/#{@contribution.id}", method: :delete %>
+        <% if user_signed_in? %>
+          <% if @contribution.user_id == current_user.id %>
+            <%= link_to "編集", edit_contribution_path(@contribution) %>
+            <%= link_to "削除", "/contributions/#{@contribution.id}", method: :delete %>
+          <% else %>
+            <td></td>
+            <td></td>
+          <% end %>
         <% else %>
           <td></td>
           <td></td>
