@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+#テストデータ時にはコメントアウト
 Tag.create!([
   { name: 'C言語' },
   { name: 'Java' },
